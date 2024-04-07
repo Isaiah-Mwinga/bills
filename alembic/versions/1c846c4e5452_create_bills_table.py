@@ -18,9 +18,14 @@ branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
-def upgrade() -> None:
-    pass
+def upgrade():
+    op.create_table(
+        "bills",
+        sa.Column("id", sa.Integer, primary_key=True, index=True),
+        sa.Column("total", sa.Float, nullable=False),
+        sa.Column("sub_bills", sa.String, nullable=False),
+    )
 
 
-def downgrade() -> None:
-    pass
+def downgrade():
+    op.drop_table("bills")
