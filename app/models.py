@@ -16,5 +16,6 @@ class SubBill(Base):
     amount = Column(Float, nullable=False)
     reference = Column(String, unique=True, nullable=True)
     bill_id = Column(Integer, ForeignKey("bills.id"))
+    bill = relationship('Bill', back_populates='sub_bills')
 
 

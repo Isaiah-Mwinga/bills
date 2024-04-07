@@ -25,6 +25,7 @@ def upgrade():
         sa.Column("amount", sa.Float, nullable=False),
         sa.Column("reference", sa.String, nullable=True),
         sa.Column("bill_id", sa.Integer, sa.ForeignKey("bills.id"), nullable=False),
+        sa.Column("bill", sa.String, nullable=False),
     )
 
 

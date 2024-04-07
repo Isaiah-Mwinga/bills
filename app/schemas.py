@@ -8,3 +8,6 @@ class SubBillCreate(BaseModel):
 class BillCreate(BaseModel):
     total: float
     sub_bills: list[SubBillCreate]
+
+    class Config:
+        orm_mode = True
