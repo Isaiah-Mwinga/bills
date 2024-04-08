@@ -1,4 +1,3 @@
-# schemas.py
 from pydantic import BaseModel
 
 class SubBillCreate(BaseModel):
@@ -7,7 +6,7 @@ class SubBillCreate(BaseModel):
 
 class BillCreate(BaseModel):
     total: float
-    sub_bills: list[SubBillCreate]
+    sub_bills: list[SubBillCreate] | None = None
 
     class Config:
         orm_mode = True

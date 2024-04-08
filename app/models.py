@@ -1,7 +1,7 @@
+# models.py
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, Table
 from sqlalchemy.orm import relationship
 from .database import Base
-
 
 class Bill(Base):
     __tablename__ = "bills"
@@ -9,6 +9,11 @@ class Bill(Base):
     id = Column(Integer, primary_key=True, index=True)
     total = Column(Float, nullable=False)
     sub_bills = relationship("SubBill", back_populates="bill", cascade="all, delete-orphan")
+
+    def __init__(self, total: float, sub_bills=None):
+        self.total = total
+        self.sub_bills = sub_bills or []
+
 class SubBill(Base):
     __tablename__ = "sub_bills"
 
@@ -17,5 +22,7 @@ class SubBill(Base):
     reference = Column(String, unique=True, nullable=True)
     bill_id = Column(Integer, ForeignKey("bills.id"))
     bill = relationship('Bill', back_populates='sub_bills')
+
+
 
 
